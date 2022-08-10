@@ -1,0 +1,70 @@
+<!--
+    .addClass()
+        선택한 요소에 인수로 전달받은 클래스를 추가
+    .removeClass()
+        선택한 요소에서 인수로 전달받은 클래스를 제거
+    .toggleClass()
+        선택한 요소에 클래스가 없으면 인수로 전달받은 클래스를 추가
+        전달받은 클래스가 추가되어 있으면 제거
+    .hasClass()
+        인수로 전달받은 값이 선택한 요소의 클래스 이름과 일치하는지 확인
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery class</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+      .lined {
+        text-decoration: line-through;
+        color: lightgray;
+      }
+    </style>
+    <script>
+      $(function () {
+        $('#addBtn').on('click', function () {
+          $('#first, #third').addClass('lined');
+          // id가 first와 third인 요소에 lined class를 추가
+        });
+        $('#removeBtn').on('click', function () {
+          $('#first, #third').removeClass('lined');
+          // id가 first와 third인 요소가 lined class에 포함되면 해당 class를 제거
+        });
+
+        $('#toggleBtn').on('click', function () {
+          $('#first, #third').toggleClass('lined');
+          // id가 first와 third인 요소에 lined class를 추가
+          // 다시 클릭하면 lined class를 제거
+        });
+
+        $('#hasClassBtn').on('click', function () {
+          let result = $('#target').hasClass('lined');
+          // id가 target인 요소가 "lined class에 포함되면 true, 포함되지 않으면 false 반환
+          $('#text').html(result);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>class 추가 및 제거</h1>
+    <p id="first">이 단락에 클래스를 추가해 보아요!</p>
+    <p>이 단락에는 클래스를 추가하지 않아요!</p>
+    <p id="third">이 단락에 클래스를 추가해 보아요!</p>
+    <button id="addBtn">class add</button>
+    <button id="removeBtn">class remove</button>
+    <button id="toggleBtn">class toggle</button>
+
+    <hr />
+
+    <h1>class 확인</h1>
+    <p id="target" class="lined">
+      hasClass() method를 이용하여 해당 요소가 특정 class에 포함되어 있는지
+      확인할 수 있습니다.
+    </p>
+    <button id="hasClassBtn">class 확인</button>
+    <p id="text"></p>
+  </body>
+</html>

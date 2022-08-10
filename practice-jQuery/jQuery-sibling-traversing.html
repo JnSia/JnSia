@@ -1,0 +1,92 @@
+<!--
+    형제(sibling) element의 탐색
+        .siblings()
+            선택한 element의 sibling element 중 지정한 selector에 해당하는 element를 모두 선택
+        .next()
+            선택한 element의 바로 다음에 위치한 sibling element를 선택
+        .nextAll()
+            선택한 element의 다음에 위치한 sibling element를 모두 선택
+                => selector를 인수로 전달하며, 해당하는 sibling element만 선택 가능
+        .nextUntil()
+            선택한 element의 sibling element 중 selector에 해당하는 element 이전까지의 element만 모두 선택
+                => selector를 인수로 전달하지 않으면 선택한 element의 다음에 위치한 sibling element를 모두 선택
+        .prev()
+            선택한 element의 바로 이전에 위치한 sibling element를 선택
+        .prevAll()
+            선택한 element의 이전에 위치한 sibling element를 모두 선택
+        .prevUntil
+            선택한 element의 sibling element 중 selector에 해당하는 element 다음까지의 element를 모두 선택
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery sibling traversing</title>
+    <style>
+      .container * {
+        display: block;
+        border: 1px solid lightgray;
+        padding: 5px;
+        margin: 15px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+      $(function () {
+        $('#sibling').on('click', function () {
+          $('h4')
+            .siblings()
+            // <h4> element의 siblings element를 모두 선택
+            .css({ border: '2px solid red' });
+          // 해당 element의 CSS style을 변경
+        });
+        $('#next').on('click', function () {
+          $('h4')
+            .next()
+            // <h4> element의 다음 siblings element를 선택
+            .css({ border: '2px solid red' });
+          // 해당 element의 CSS style을 변경
+        });
+        $('#nextAll').on('click', function () {
+          $('h4')
+            .nextAll()
+            // <h4> element의 다음 siblings element를 모두 선택
+            .css({ border: '2px solid red' });
+          // 해당 element의 CSS style을 변경
+        });
+        $('#nextAll').on('click', function () {
+          $('h4')
+            .nextAll()
+            // <h4> element의 다음 siblings element를 모두 선택
+            .css({ border: '2px solid red' });
+          // 해당 element의 CSS style을 변경
+        });
+        $('#nextUntil').on('click', function () {
+          $('h4')
+            .nextUntil('p')
+            // <h4> element의 sibling element 중 첫 번째 <p> element 이전까지의 모든 element를 선택
+            .css({ border: '2px solid red' });
+          // 해당 element의 CSS style을 변경
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>sibling traversing</h1>
+    <div class="container">
+      <div>div element</div>
+      <h2>h2 element</h2>
+      <h3>h3 element</h3>
+      <h4>h4 element (standard</h4>
+      <h5>h5 element</h5>
+      <h6>h6 element</h6>
+      <p>p element</p>
+    </div>
+    <button id="sibling">h4 element의 sibling element</button>
+    <button id="next">h4 element의 sibling element</button>
+    <button id="nextAll">h4 element의 sibling element</button>
+    <button id="nextUntil">h4 element의 sibling element</button>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!--
+    .animate() method
+        사용자가 직접 원하는 이펙트 효과를 정의
+        여러 CSS 속성을 이용하여 새로운 이펙트 효과를 생성
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery custom</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+      #divBox {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        background-color: yellow;
+        border: 5px solid red;
+        margin-top: 20px;
+      }
+      #divBox2 {
+        width: 50px;
+        height: 50px;
+        background-color: green;
+        margin-top: 20px;
+      }
+    </style>
+    <script>
+      $(function () {
+        $('#animateBtn').on('click', function () {
+          $('#divBox').animate(
+            // id가 divBox인 요소를
+            {
+              left: '+=100',
+              // 오른쪽으로 100px 이동
+              opacity: 0.2,
+              // 투명도를 0.2로 변경
+              height: 'toggle',
+              // CSS height 속성값을 미리 정의된 "toggle"로 설정
+            },
+            500,
+            // 0.5초에 걸쳐서 이펙트 효과가 진행
+            function () {
+              $('#text').html('사용자 정의 이펙트가 실행됐어요!');
+            }
+          );
+        });
+        $('#divBox2').mouseenter(function () {
+          $(this).stop().animate(
+            {
+              width: '300px',
+              // CSS width 속성값을 300px로 설정
+            },
+            1000,
+            'linear'
+          );
+          // 시간당 속도 함수를 linear로 설정
+        });
+        $('#divBox2').mouseleave(function () {
+          $(this).stop().animate(
+            {
+              width: '50px',
+              // CSS width 속성값을 300px로 설정
+            },
+            1000,
+            'swing'
+          );
+          // 시간당 속도 함수를 swing로 설정
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>.animate() method</h1>
+    <button id="animateBtn">이펙트 효과 시작!</button>
+    <p id="text">이펙트 효과가 끝나면 이 텍스트는 변경될 거에요!</p>
+    <div id="divBox"></div>
+
+    <hr />
+
+    <div id="divBox2"></div>
+  </body>
+</html>

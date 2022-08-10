@@ -1,0 +1,88 @@
+<!--
+    .slideUp()
+        선택한 요소의 CSS height 속성값을 높여가며 요소를 사라지게 함
+    .slideDown()
+        선택한 요소의 CSS height 속성값을 낮춰가며 요소를 나타나게 함
+    .slideToggle()
+        선택한 요소에 slideUp() method와 slideDown() method를 번갈아가며 적용
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery slide & effect handling</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+      #divBox {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        border: 5px solid green;
+        margin-top: 20px;
+      }
+      #divBox2 {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        border: 5px solid red;
+        margin-top: 20px;
+      }
+    </style>
+    <script>
+      $(function () {
+        $('#slideUpBtn').on('click', function () {
+          $('#divBox').slideUp(500);
+          // id가 divBox인 요소를 올라가면서 사라지게 함
+        });
+        $('#slideDownBtn').on('click', function () {
+          $('#divBox').slideDown(300);
+          // id가 divBox인 요소를 내려가면서 나타나게 함
+        });
+
+        $('#slideToggleBtn').on('click', function () {
+          $('#divBox').slideToggle('fast');
+          // id가 divBox인 요소를 빠르게 올라가면서 사라지거나 내려오면서 나타나게 함
+        });
+
+        $('#startBtn').on('click', function () {
+          $('#divBox2').fadeOut(500).delay(1000).fadeIn(2000);
+          // id가 divBox인 요소를 0.5초에 걸쳐 사라지게 하고
+          // 1초의 지연시간 뒤에 다시 2초에 걸쳐 나타나게 함
+        });
+
+        $('#toggleBtn').on('click', function () {
+          $('#divBox2').slideToggle(2000);
+          // id가 divBox인 요소를 2초에 걸쳐 올라가면서 사라지거나 내려오면서 나타나게 함
+        });
+        $('#stopBtn').on('click', function () {
+          $('#divBox2').stop();
+          // id가 divBox인 요소에서 실행 중인 모든 이펙트 효과를 즉시 중지
+        });
+        $('#finishBtn').on('click', function () {
+          $('#divBox2').finish();
+          // id가 divBox인 요소에서 실행 중인 모든 이펙트 효과를 즉시 중지시키고 큐까지 모두 제거
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>슬라이드 업과 슬라이드 다운</h1>
+    <button id="slideUpBtn">슬라이드 업</button>
+    <button id="slideDownBtn">슬라이드 다운</button>
+
+    <button id="slideToggleBtn">슬라이드 효과 토글</button>
+    <div id="divBox"></div>
+
+    <hr />
+
+    <h1>이펙트 효과의 지연 설정</h1>
+    <button id="startBtn">이펙트 효과 시작!</button>
+
+    <button id="toggleBtn">이펙트 효과 시작!</button>
+    <button id="stopBtn">이펙트 효과 정지!</button>
+    <button id="finishBtn">이펙트 효과 중지!</button>
+    <div id="divBox2"></div>
+  </body>
+</html>

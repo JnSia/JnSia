@@ -1,0 +1,206 @@
+<!--
+    jQuery element size method
+
+    inner: method의 접두사로 사용되며 padding 영역이 포함된 크기 정보를 반환
+    outer: mrthod의 접두사로 사용되며 border 영역까지 포한된 크기 정보를 반환
+        인수로 true 값을 전달하면 margin 영역까지 포함된 크기 정보를 반환
+
+    .width()와 .height()
+        => 요소의 크기
+    .innerWidth()와 .innerHeight()
+        => 요소의 크기 + padding의 크기
+    .outerWidth()와 .outerHeight()
+        => 요소의 크기 + padding의 크기 + border의 크기
+    .outerWidth(true)와 .outerHeight(true)
+        => 요소의 크기 + padding의 크기 + border의 크기 + margin의 크기
+
+    jQuery element position method
+    
+    .offset()
+        선택한 요소 집합의 첫 번째 요소의 위치를 html 문서를 기준으로 반환
+        선택한 요소의 위치를 인수로 전달받은 값으로 설정
+    .position()
+        선택한 요소 집합의 첫 번째 요소의 위치를 부모 요소 기준으로 상대 위치를 반환
+        기준이 되는 부모요소는 .offsetParent() method를 사용하여 확인 가능
+    .scrollLeft()
+        선택한 요소 집합의 첫 번째 요소의 수평 스크롤 바의 위치를 반환
+        선택한 요소의 수평 스크롤 바의 위치를 인수로 전달받은 값으로 설정
+    .scrollLeft()
+        선택한 요소 집합의 첫 번째 요소의 수직 스크롤 바의 위치를 반환
+        선택한 요소의 수직 스크롤 바의 위치를 인수로 전달받은 값으로 설정
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery element size & position</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <style>
+      #divBox {
+        width: 300px;
+        height: 200px;
+        padding: 10px;
+        margin: 15px;
+        border: 5px solid orange;
+      }
+      #divdiv {
+        width: 100px;
+        height: 50px;
+        border: 1px solid black;
+        margin: 10px;
+      }
+      #para {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      .container * {
+        display: block;
+        border: 1px solid black;
+        padding: 5px;
+        margin: 15px;
+      }
+      #ddivddiv {
+        width: 150px;
+        height: 150px;
+        border: 1px solid lightgray;
+        overflow: auto;
+      }
+    </style>
+    <script>
+      $(function () {
+        $('#size').on('click', function () {
+          let str = '이 div element의 ';
+          str += '너비는 ' + $('#divBox').width('400') + ' 픽셀이고,<br>';
+          // id가 divBox인 element의 width를 반환
+          str += '높이는 ' + $('#divBox').height() + ' 픽셀입니다.<br>';
+          // id가 divBox인 element의 height를 반환
+          str +=
+            '패딩 영역을 포함한 크기는 ' +
+            $('#divBox').innerWidth() +
+            ' X ' +
+            $('#divBox').innerHeight() +
+            '이고,<br>';
+          // id가 "divBox"인 요소의 패딩 영역을 포함한 크기를 반환함.
+          str +=
+            '테두리까지 포함한 크기는 ' +
+            $('#divBox').outerWidth() +
+            ' X ' +
+            $('#divBox').outerHeight() +
+            '이고,<br>';
+          // id가 "divBox"인 요소의 패딩 영역과 테두리를 포함한 크기를 반환함.
+          str +=
+            '마진 영역까지 포함한 크기는 ' +
+            $('#divBox').outerWidth(true) +
+            ' X ' +
+            $('#divBox').outerHeight(true) +
+            '입니다.';
+          // id가 "divBox"인 요소의 패딩 영역과 테두리, 마진 영역까지 포함한 크기를 반환함.
+          $('#text').html(str);
+        });
+        $('#offset').on('click', function () {
+          $('#para').offset({ top: 500 });
+          // id가 para인 element의 position을 설정
+          let paraPosition = $('#para').offset();
+          // id가 para인 element의 position 정보를 저장
+          let str = 'p element의 position은<br>';
+          str += 'left가 ' + paraPosition.left + '픽셀이고, ';
+          // id가 para인 element의 left position을 반환
+          str += 'top이 ' + paraPosition.top + '픽셀입니다.';
+          // id가 para인 element의 top position을 반환
+          $('#text2').html(str);
+        });
+        $('#position').on('click', function () {
+          let str2 = '';
+          var offsetPosition = $('#para').offset();
+          // offset() method를 사용한 id가 "para"인 요소의 위치 정보
+          str2 += 'offset() 메소드를 사용하여 구한 p 요소의 위치는<br>';
+          str2 += 'left가 ' + offsetPosition.left + '픽셀이고, ';
+          // id가 "para"인 요소의 left 위치를 반환
+          str2 += 'top이 ' + offsetPosition.top + '픽셀입니다.<br>';
+          // id가 "para"인 요소의 top 위치를 반환
+          var posPosition = $('#para').position();
+          // position() 메소드를 사용한 id가 "para"인 요소의 위치 정보
+          str2 += 'position() 메소드를 사용하여 구한 p 요소의 위치는<br>';
+          str2 += 'left가 ' + posPosition.left + '픽셀이고, ';
+          // id가 "para"인 요소의 left 위치를 반환
+          str2 += 'top이 ' + posPosition.top + '픽셀입니다.';
+          // id가 "para"인 요소의 top 위치를 반환
+          $('#text2').html(str2);
+        });
+        $('#offsetParent').on('click', function () {
+          $('#para2')
+            .offsetParent()
+            // id가 para인 요소가 위치할 때 기준이 된 조상 요소를 선택
+            .css('border', '2px solid red');
+          // 해당 요소의 CSS style을 변경
+        });
+        $('#scroll').on('click', function () {
+          let str3 =
+            '수평 스크롤 바의 현재 위치는 left 방향으로 ' +
+            $('#ddivddiv').scrollLeft() +
+            ' 픽셀이고,<br>';
+          // id가 ddivddiv인 요소의 수평 스크롤 바의 현재 위치를 반환
+          str3 +=
+            '수평 스크롤 바의 현재 위치는 top 방향으로 ' +
+            $('#ddivddiv').scrollTop(70) +
+            ' 픽셀입니다.';
+          // id가 ddivddiv인 요소의 수평 스크롤 바의 현재 위치를 반환
+          $('#text3').html(str3);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>jQuery size method</h1>
+    <div id="divBox">
+      <p id="text"></p>
+    </div>
+    <button id="size">element의 크기 정보</button>
+
+    <hr />
+
+    <h1>jQuery position method</h1>
+    <div id="divdiv">
+      <p id="para">p element</p>
+    </div>
+    <button id="offset">offset</button>
+    <button id="position">position</button>
+    <p id="text2"></p>
+
+    <hr />
+
+    <h1>.offsetParent() method</h1>
+    <div class="container">
+      <div>
+        div 요소
+        <ul style="position: relative">
+          ul 요소
+          <li>li 요소</li>
+          <li>
+            li 요소
+            <p id="para2">
+              p 요소 (기준)
+              <span>span 요소</span>
+            </p>
+          </li>
+          <li>li 요소</li>
+        </ul>
+      </div>
+    </div>
+    <button id="offsetParent">offsetParent</button>
+
+    <hr />
+
+    <div id="ddivddiv">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur
+      deserunt nobis id asperiores, perspiciatis harum voluptatibus, tenetur
+      veniam molestias error, ipsam reprehenderit laboriosam laborum optio autem
+      excepturi quis. Ratione, quod.
+    </div>
+    <button id="scroll">scroll bar의 position 정보</button>
+    <p>스크롤 바를 움직인 후에 버튼을 다시 눌러보세요!</p>
+    <p id="text3"></p>
+  </body>
+</html>

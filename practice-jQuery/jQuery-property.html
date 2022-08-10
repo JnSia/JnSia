@@ -1,0 +1,94 @@
+<!--
+    .css()
+        선택한 요소의 CSS style을 간단하게 설정
+        선택한 요소 집합의 첫 번째 요소의 스타일 속성값을 반환
+        선택한 요소의 스타일 속성을 인수로 전달받은 값으로 설정
+            선택한 요소의 스타일에 관한 여러 속성값을 한 번에 설정 가능
+            -으로 연결된 속성명과 camelCase 방식의 속성명을 둘 다 사용 가능
+
+    .attr()
+        선택한 요소 집합의 첫번째 요소의 지정된 속성값을 반환
+        선택한 요소의 지정된 속성을 전달받은 값으로 설정
+    .prop()
+        선택한 요소 집합의 첫번째 요소의 지정된 property 값을 반환
+        선택한 요소의 지정된 property를 전달받은 값으로 설정
+
+    속성(attribute): HTML 요소의 추가적인 정보를 가지고 있는 이름과 값의 한 쌍
+        => HTML 문서에 존재하고 값이 변하지 않음
+    프로퍼티(property): 속성을 객체화하였을 때, HTML DOM 트리 내부에서의 값
+        => HTML DOM tree에 존재하고 값이 변할 수 있음
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery property</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+      $(function () {
+        $('#css').on('click', function () {
+          $('p').css({
+            fontSize: '25px',
+            // 모든 <p> 요소의 글씨 크기를 25px로 설정
+            backgroundColor: 'yellow',
+            // 모든 <p> 요소의 배경색을 노란색으로 설정
+          });
+          $('#text').html($('p').css('fontSize'));
+          // 첫번째 <p> 요소의 글씨 크기를 반환
+        });
+
+        $('#setBtn').on('click', function () {
+          $('#word')
+            .attr('title', '즐거운 jQuery 수업이에요~')
+            // id가 word인 요소에 title 속성을 설정
+            .css('color', 'red');
+          // 해당 요소의 CSS style을 설정
+        });
+        $('#removeBtn').on('click', function () {
+          $('#word')
+            .removeAttr('title')
+            // 해당 요소에서 title 속성을 제거
+            .css('color', 'black');
+        });
+
+        $('#setBtn2').on('click', function () {
+          $('input[value="jQuery"]')
+            // <input> 요소 중 value 값이 jQuery인 요소를 선택한 후
+            .prop({ checked: true });
+          // 해당 요소에 checked property를 true 값으로 설정
+        });
+        $('#removeBtn2').on('click', function () {
+          $('input[value="jQuery"]').removeProp('checked');
+          // 해당 요소에서 checked property를 삭제
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>.css() method</h1>
+    <p>모든 단락의 CSS style을 변경해 보아요!</p>
+    <button id="css">스타일 설정</button>
+    <p id="text"></p>
+
+    <hr />
+
+    <h1>.attr() method</h1>
+    <p>이 <span id="word">단어</span>에 title 속성을 설정해 보아요!</p>
+    <p>아래 버튼을 누른 후 단어 위로 마우스를 가져가 보세요!</p>
+    <button id="setBtn">속성값 설정</button>
+    <button id="removeBtn">속성 제거</button>
+
+    <hr />
+
+    <h1>.prop() method</h1>
+    <form>
+      <input type="checkbox" name="lecture" value="html" checked /> HTML <br />
+      <input type="checkbox" name="lecture" value="jQuery" /> jQuery
+    </form>
+    <br />
+    <button id="setBtn2">jQuery에 property 값 설정</button>
+    <button id="removeBtn2">property 제거</button>
+  </body>
+</html>
