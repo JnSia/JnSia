@@ -1,0 +1,108 @@
+<!--
+    $.ajax()
+        비동기식 Ajax를 이용하여 HTTP 요청을 전송
+    $.getScript()
+        웹 페이지에 스크립트를 추가
+    $.getJSON()
+        전달받은 주소로 GET 방식의 HTTP 요청을 전송
+        응답으로 JSON 파일을 전송 받음
+    .load()
+        서버에서 데이터를 읽은 후, 읽어 들인 HTML 코드를 선택한 요소에 배치
+
+    Ajax는 서버와의 비동기식 통신을 위해 form 요소를 통해 입력받은 데이터를 직렬화하여 전송
+    직렬화(serialization): 입력받은 여러 데이터를 하나의 query string로 만드는 것을 의미
+        => form 요소를 통해 입력받은 데이터를 한 번에 서버로 전송 가능
+
+    .serialize() method
+        HTML form 요소를 통해 입력된 데이터를 query string으로 반환
+    .serialzeArray() method
+        입력된 데이터를 문자열이 아닌 array object로 변환
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Ajax method</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+      $(function () {
+        $('#requestBtn').on('click', function () {
+          $.ajax({
+            url: './test.php', // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+            data: { name: '김준수' }, // HTTP 요청과 함께 서버로 보낼 데이터
+            method: 'GET', // HTTP 요청 방식 (GET, POST)
+            dataType: 'json', // 서버에서 보내 줄 데이터의 타입
+          })
+            .done(function (json) {
+              $('<h1>').text(json.title).appendTo('body');
+              $("<div class='content'>").html(json.html).appendTo('body');
+              alert('요청 성공');
+            })
+            // HTTP 요청이 성공하면 요청한 데이터가 done() method로 전달
+            .fail(function (xhr, status, errorThrown) {
+              $('#text')
+                .html('오류가 발생했습니다.<br>')
+                .append('오류명: ' + errorThrown + '<br>')
+                .append('상태: ' + status);
+              alert('요청 실패');
+            })
+            // HTTP 요청이 실패하면 오류와 상태에 관한 정보가 fail() method로 전달
+            .always(function (xhr, status) {
+              $('#text').html('요청이 완료되었습니다!');
+              alert('요청 완료');
+            });
+          // HTTP 요청의 성공 여부와 성관없이 항상 always() method가 실행
+        });
+
+        $('#loadBtn').on('click', function () {
+          $('#list').load('./jQuery-Ajax.html');
+        });
+
+        $('form').on('submit', function (event) {
+          // <form> 요소에 "submit" event가 발생할 때,
+          event.preventDefault();
+          //서버로 전송하지 않음
+          $('#text').html($(this).serialize());
+          // 입력받은 데이터를 직렬화하여 나타냄
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>$.ajax() method</h1>
+    <button id="requestBtn">$.ajax() method 실행</button>
+    <p id="text"></p>
+
+    <hr />
+
+    <h1>.load() method</h1>
+    <button id="loadBtn">HTML code load!</button>
+    <ol id="list"></ol>
+
+    <hr />
+
+    <h1>직렬화(serialization)</h1>
+    <form action="./test.php">
+      자신의 별명을 적어주세요 : <br />
+      <input type="text" name="nickname" value="DYH" /><br /><br />
+
+      현재 살고 있는 지역을 선택해 주세요 : <br />
+      <input type="radio" name="region" value="서울" checked /> 서울 <br />
+      <input type="radio" name="region" value="경기" /> 경기 <br />
+      <input type="radio" name="region" value="대전" /> 대전 <br />
+      <input type="radio" name="region" value="부산" /> 부산 <br />
+      <input type="radio" name="region" value="광주" /> 광주 <br /><br />
+
+      좋아하는 음악 장르를 모두 골라주세요 : <br />
+      <input type="checkbox" name="music" value="팝" checked /> 팝 <br />
+      <input type="checkbox" name="music" value="재즈" /> 재즈 <br />
+      <input type="checkbox" name="music" value="댄스" /> 댄스 <br />
+      <input type="checkbox" name="music" value="발라드" /> 발라드 <br /><br />
+
+      <input type="submit" value="전송" />
+    </form>
+    <p id="text2"></p>
+  </body>
+</html>

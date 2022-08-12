@@ -1,0 +1,87 @@
+<!--
+    Ajax: Asynchronous JavaScript and XML
+        웹 페이지 전체를 다시 로딩하지 않고 웹 페이지의 일부분만 갱신
+        백그라운드 영역에서 서버와 데이터를 교환하여 웹 페이지에 표시
+
+    대표적인 framework
+        prototype
+        script.aculo.us
+        dojo
+        jQuery
+
+    HTTP 요청 방식
+        GET 방식: 주소에 data를 추가하여 전달하는 방식
+            브라우저에 의해 캐시되어(cached) 저장
+            보통 쿼리 문자열(query string)에 포함되어 전송 -> 길이 제한
+            보안상 취약점이 존재 -> 중요한 데이터는 POST 방식을 사용하여 요청
+        POST 방식: data를 별도로 첨부하여 전달하는 방식
+            브라우저에 의해 캐시되지 않음 -> 브라우저 히스토리에 남지 않음
+            data는 query string과 별도로 전송 -> 데이터 길이 제한 X
+            보안성이 높음
+    
+    $.get() method
+        서버에 GET 방식의 HTTP 요청을 보낼 수 있음
+
+    $.post() method
+        서버에 POST 방식의 HTTP 요청을 보낼 수 있음
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Ajax</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script>
+      $(function () {
+        $('#requestBtn').on('click', function () {
+          $('#text').load('./test.txt');
+        });
+
+        $('#getBtn').on('click', function () {
+          $.get(
+            './test.php',
+            // GET 방식으로 서버에 HTTP Request를 전송
+            { species: '고양이', name: '나비', age: 3 },
+            // 서버가 필요한 정보를 같이 전송
+            function (date, status) {
+              $('#text2').html(data + '<br>' + status);
+              // 전송받은 데이터와 전송 성공 여부를 표시
+            }
+          );
+        });
+
+        $('#postBtn').on('click', function () {
+          $.get(
+            './test.php',
+            // POST 방식으로 서버에 HTTP Request를 전송
+            { name: '김준수', grade: 'A' },
+            // 서버가 필요한 정보를 같이 전송
+            function (date, status) {
+              $('#text3').html(data + '<br>' + status);
+              // 전송받은 데이터와 전송 성공 여부를 표시
+            }
+          );
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>jQuery와 Ajax</h1>
+    <p id="text">이 단락에 다른 텍스트를 불러와보죠!</p>
+    <button id="requestBtn">데이터 불러오기!</button>
+
+    <hr />
+
+    <h1>$.get() method</h1>
+    <button id="getBtn">GET 방식으로 데이터 불러오기!</button>
+    <p id="text2"></p>
+
+    <hr />
+
+    <h1>$.post() method</h1>
+    <button id="postBtn">POST 방식으로 데이터 불러오기!</button>
+    <p id="text3"></p>
+  </body>
+</html>
