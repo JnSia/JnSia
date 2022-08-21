@@ -41,4 +41,5 @@ const newObject = {
 
 newObject.sayNode();
 newObject.sayJS();
+
 console.log(newObject.ES6);
