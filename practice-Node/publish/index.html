@@ -1,0 +1,35 @@
+<!--
+      템플릿 엔진 (Pug, )
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/upload" method="post" enctype="multiport/form-data">
+      <input type="file" name="image" multiple />
+      <input type="text" name="title" />
+      <button type="submit">업로드</button>
+    </form>
+    <!--
+        form 태그의 enctype이 multipart/form-data인 경우
+            body-parser로는 요청 본문을 해석할 수 없음
+            => multer 패키지 이용
+    -->
+    <script>
+      document.getElementById('form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('image', e.target.image.files[0]);
+        formData.append('image', e.target.image.files[1]);
+        formData.append('title', e.target.title.value);
+        axios.post('/upload', formData);
+      });
+    </script>
+  </body>
+</html>
