@@ -9,7 +9,6 @@ function LandingPage() {
       <Header />
       <div>검색창</div>
       <div>리스트 카드</div>
-      <div>광고</div>
       <ChatBot />
       <Footer />
     </div>
