@@ -4,17 +4,29 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Landing from './Pages/Landing';
 import Home from './Pages/Home';
 import Write from './Pages/Write';
+import Rewrite from './Pages/Rewrite';
+import Cause from './Pages/Cause';
 import Sort from './Pages/Sort';
+import Reserve from './Pages/Reserve';
+import Error from './Pages/Error';
+import Post from './Pages/Post';
+import Resister from './Pages/Resister';
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div class="App bg-dark">
         <Routes>
           <Route exact path="/" element={<Landing />}></Route>
+          <Route path="/resister" element={<Resister />}></Route>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/write" element={<Write />}></Route>
+          <Route path="/rewrite" element={<Rewrite />}></Route>
+          <Route path="/cause" element={<Cause />}></Route>
           <Route path="/sort" element={<Sort />}></Route>
+          <Route path="/reserve" element={<Reserve />}></Route>
+          <Route path="/post" element={<Post />}></Route>
+          <Route path="*" element={<Error />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

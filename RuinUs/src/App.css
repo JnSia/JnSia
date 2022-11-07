@@ -1,81 +1,30 @@
+* {
+  font-family: 'HiMelody';
+  /* font-weight: bold; */
+}
+
+@font-face {
+  font-family: 'HiMelody';
+  src: url(../src/fonts/HiMelody-Regular.ttf);
+}
+
 .App {
-  /* background-color: aliceblue; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 0 auto;
+  height: 100%;
+  height: 100vh;
 }
 
-.landing {
-  width: 100%;
-  text-align: center;
-  min-height: 535px;
-
-  background-color: aliceblue;
+#writeRegion {
+  background-image: url('./image/page.png');
 }
 
-.Header {
-  width: 100%;
-  height: 85px;
-  border-bottom: 1px solid black;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+#writeRegion div,
+#writeRegion input,
+#writeRegion textarea {
+  background: none;
+  border: none;
 }
 
-.WriteBtn {
-  text-align: center;
-  text-decoration: none;
-  line-height: 75px;
-  width: 75px;
-  height: 75px;
-  position: absolute;
-  border: 1px solid black;
-  border-radius: 20px;
-  background-color: lightgrey;
-  top: 80%;
-  left: 60%;
-  color: black;
-}
-
-.Home {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid black;
-}
-
-.List {
-  width: 95%;
-  min-height: 535px;
-  /* border: 1px solid black; */
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-}
-
-.title {
-  display: flex;
-  width: 95%;
-  line-height: 25px;
-  height: 25px;
-  margin-top: 25px;
-}
-
-#title {
-  font-size: 14px;
-  height: 25px;
-  text-align: start;
-  border-bottom: 1px solid black;
-}
-
-#deleteTime {
-  font-size: 12px;
-  height: 25px;
-  text-align: end;
-  border-bottom: 1px solid black;
-  color: lightgrey;
+#writeRegion textarea {
+  min-height: 60vh;
 }

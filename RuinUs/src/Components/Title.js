@@ -1,20 +1,24 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
-export class Title extends Component {
-  render() {
-    return (
-      <div class="row align-items-end" className="title">
-        <p class="col-8" id="title">
-          {this.props.title}
-        </p>
-        <p class="col-4" id="deleteTime">
-          {this.props.deleteTime}
-        </p>
-        <Link to="/Write"></Link>
-      </div>
-    );
+function Title(props) {
+  function goPost() {
+    document.location.href = '/post';
   }
+
+  return (
+    <div>
+      <div className="card m-4" onClick={goPost}>
+        <div className="card-body">
+          <div id="title" class="m-1 fw-bold fs-6">
+            {props.title}
+          </div>
+          <div id="deleteTime" class="m-1 fs-6 text-end text-muted">
+            {props.time}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Title;

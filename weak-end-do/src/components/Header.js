@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
-import Modal from 'react-modal';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-function Header() {
-  const [ModalIsOpen, setModalIsOpen] = useState(false);
-
-  function GoBlog() {
-    window.location.href = 'https://blog.naver.com/kia546';
-  }
-
+function MyVerticallyCenteredModal(props) {
   return (
-    <div className="Header">
-      <button className="setting" onClick={() => setModalIsOpen(true)}>
-        설정
-      </button>
-      <Modal className="modal" isOpen={ModalIsOpen}>
-        <button onClick={GoBlog}>개발자 근황 알아보기</button>
-        <button onClick={() => setModalIsOpen(false)}>닫기</button>
-      </Modal>
-    </div>
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Modal heading
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4>Centered Modal</h4>
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
+          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
+          consectetur ac, vestibulum at eros.
+        </p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
   );
 }
 
