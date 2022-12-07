@@ -28,3 +28,13 @@
 #writeRegion textarea {
   min-height: 60vh;
 }
+
+#sort-btns,
+#cause-btns {
+  pointer-events: none;
+}
+
+#sort-btns > button,
+#cause-btns > button {
+  pointer-events: all;
+}

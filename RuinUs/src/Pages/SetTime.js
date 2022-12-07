@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-function Setting(props) {
+function SetTime(props) {
   function logout() {
     document.location.href = '/';
   }
@@ -10,13 +10,10 @@ function Setting(props) {
     <Modal {...props} size="sm" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter" class="fs-6 px-2">
-          설정
+          삭제 시간 설정
         </Modal.Title>
       </Modal.Header>
       <Modal.Body class="p-2 m-2 row">
-        <button type="button" class="btn btn-dark my-2" onClick={logout}>
-          로그아웃
-        </button>
         <button type="button" class="btn btn-dark my-2" onClick={props.onHide}>
           돌아가기
         </button>
@@ -26,4 +23,4 @@ function Setting(props) {
   );
 }
 
-export default Setting;
+export default SetTime;
