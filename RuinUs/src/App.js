@@ -11,21 +11,86 @@ import Reserve from './Pages/Reserve';
 import Error from './Pages/Error';
 import Post from './Pages/Post';
 import Resister from './Pages/Resister';
+import PublicRoute from './Components/Route/PublicRoute';
+import PrivateRoute from './Components/Route/PrivateRoute';
 
 function App() {
   return (
     <BrowserRouter>
       <div class="App bg-dark">
         <Routes>
-          <Route exact path="/" element={<Landing />}></Route>
-          <Route path="/resister" element={<Resister />}></Route>
-          <Route path="/home" element={<Home />}></Route>
-          <Route path="/write" element={<Write />}></Route>
-          <Route path="/rewrite" element={<Rewrite />}></Route>
-          <Route path="/cause" element={<Cause />}></Route>
-          <Route path="/sort" element={<Sort />}></Route>
-          <Route path="/reserve" element={<Reserve />}></Route>
-          <Route path="/post" element={<Post />}></Route>
+          <Route
+            path="/"
+            element={
+              <PublicRoute>
+                <Landing />
+              </PublicRoute>
+            }
+          ></Route>
+          <Route
+            path="/resister"
+            element={
+              <PublicRoute>
+                <Resister />
+              </PublicRoute>
+            }
+          ></Route>
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/write"
+            element={
+              <PrivateRoute>
+                <Write />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/rewrite"
+            element={
+              <PrivateRoute>
+                <Rewrite />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/cause"
+            element={
+              <PrivateRoute>
+                <Cause />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/sort"
+            element={
+              <PrivateRoute>
+                <Sort />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/reserve"
+            element={
+              <PrivateRoute>
+                <Reserve />
+              </PrivateRoute>
+            }
+          ></Route>
+          <Route
+            path="/post"
+            element={
+              <PrivateRoute>
+                <Post />
+              </PrivateRoute>
+            }
+          ></Route>
           <Route path="*" element={<Error />}></Route>
         </Routes>
       </div>
