@@ -38,7 +38,12 @@ function Landing() {
         <div class="fs-1 fw-bold">Ruin Us</div>
         <div class="text-muted">"나쁜 기억 메모장"</div>
       </div>
-      <form name="loginForm" method="post" class="container bg-light col-12 col-md-10 col-lg-8 my-2 p-2">
+      <form
+        name="loginForm"
+        action="/login"
+        method="post"
+        class="container bg-light col-12 col-md-10 col-lg-8 my-2 p-2"
+      >
         <div class="row justify-content-center">
           <label for="userID" class="col-2 col-form-label border rounded-5">
             ID

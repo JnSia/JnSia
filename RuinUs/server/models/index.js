@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
-const User = require('./user');
+const user = require('./user');
+const content = require('./content');
 
+// 배포 시에 'product'로 바꾸기
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config')[env];
 const db = {};
@@ -9,8 +11,13 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 db.sequelize = sequelize;
 
-db.User = User;
+db.User = user;
+db.Content = content;
 
-User.init(sequelize);
+user.init(sequelize);
+content.init(sequelize);
+
+user.associate(db);
+content.associate(db);
 
 module.exports = db;

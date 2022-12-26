@@ -1,29 +1,34 @@
-const Sequelize = require('sequelize');
+const DataTypes = require('sequelize');
+const { Model } = DataTypes;
 
-module.exports = class Content extends Sequelize.Model {
+module.exports = class Content extends Model {
   static init(sequelize) {
     return super.init(
       {
         // id는 자동 생성
-        name: {
-          type: Sequelize.STRING(20),
+        title: {
+          type: DataTypes.STRING(50),
           allowNull: false, // NOT NULL
           unique: true,
         },
-        age: {
-          type: Sequelize.INTEGER.UNSIGNED,
+        contents: {
+          type: DataTypes.TEXT,
           allowNull: false,
         },
-        married: {
-          type: Sequelize.BOOLEAN, // TINYINT
+        cause: {
+          type: DataTypes.TEXT,
           allowNull: false,
         },
-        comment: {
-          type: Sequelize.TEXT,
-          allowNull: true,
+        sort: {
+          type: DataTypes.TEXT,
+          allowNull: false,
+        },
+        reserve: {
+          type: DataTypes.TEXT,
+          allowNull: false,
         },
         createdAt: {
-          type: Sequelize.DATE, // DATETIME
+          type: DataTypes.DATE, // DATETIME
           allowNull: false,
           defaultValue: sequelize.NOW,
         },
@@ -39,5 +44,8 @@ module.exports = class Content extends Sequelize.Model {
         collate: 'utf8_general_ci',
       }
     );
+  }
+  static associate(db) {
+    db.Content.belongsTo(db.User, { foreignKey: 'users', targetKey: 'id' });
   }
 };
