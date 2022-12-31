@@ -4,7 +4,7 @@ import SetTime from './SetTime';
 
 function Reserve() {
   const [modalShow, setModalShow] = useState(false);
-  const [custom, setCustom] = useState('직접입력');
+  const [custom, setCustom] = useState();
 
   useEffect(() => {
     const reserveBtn = document.querySelector('#reserve-btns');
@@ -57,9 +57,18 @@ function Reserve() {
             value={custom}
             onClick={() => setModalShow(true)}
           >
-            <SetTime show={modalShow} onHide={() => setModalShow(false)} />
-            {custom}
+            {custom || '직접입력'}
           </button>
+          <SetTime
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            onChange={(e) => {
+              const customDate = e.target.attributes.datetime.value;
+
+              setModalShow(false);
+              setCustom(customDate);
+            }}
+          />
         </div>
       </div>
     </div>

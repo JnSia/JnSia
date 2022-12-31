@@ -6,13 +6,17 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
 
 function SetTime(props) {
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(new Date());
 
-  forwardRef();
-  // datepicker custom style 설정
+  const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button class="m-2 p-2 btn btn-secondary" onClick={onClick} ref={ref}>
+      {value}
+    </button>
+  ));
 
   let datetime = date;
 
+  console.log(date);
   console.log(datetime);
 
   return (
@@ -27,26 +31,25 @@ function SetTime(props) {
           selected={date}
           onChange={(datetime) => {
             setDate(datetime);
-            console.log(date);
           }}
           placeholderText="나를 클릭하세요."
           locale={ko}
-          dateFormat="yyyy년 MM월 dd일 h:mm aa"
+          dateFormat="yy년 MM월 dd일 aa h:mm"
           minDate={new Date()}
           withPortal
           showTimeSelect
           timeIntervals={30}
           timeCaption="Time"
-          // customInput={<ExampleCustomInput />}
+          customInput={<ExampleCustomInput />}
         />
       </Modal.Body>
       <Modal.Footer class="d-flex mx-2 px-2 justify-content-between">
-        <button type="button" class="btn btn-dark my-2" onClick={props.onHide}>
+        <button type="button" class="btn btn-dark my-2 btn-sm" onClick={props.onHide}>
           돌아가기
         </button>
         <button
           type="button"
-          class="btn btn-dark my-2"
+          class="btn btn-dark my-2 btn-sm"
           datetime={datetime}
           onClick={props.onChange}
         >
