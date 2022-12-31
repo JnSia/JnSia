@@ -13,7 +13,7 @@ import Post from './Pages/Post';
 import Resister from './Pages/Resister';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <BrowserRouter>

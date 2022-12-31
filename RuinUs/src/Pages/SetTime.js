@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { forwardRef, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import Datepicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
+import { ko } from 'date-fns/esm/locale';
 
 function SetTime(props) {
+  const [date, setDate] = useState();
+
+  forwardRef();
+  // datepicker custom style 설정
+
+  let datetime = date;
+
+  console.log(datetime);
+
   return (
     <Modal {...props} size="sm" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton>
@@ -9,13 +22,35 @@ function SetTime(props) {
           삭제 시간 설정
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body class="p-2 m-2 row">
-        <h1>날짜 입력할 수 있는 달력</h1>
-        <h1>시간 입력할 수 있는 시계</h1>
+      <Modal.Body class="d-flex flex-column justify-content-center align-items-center bg-dark p-2">
+        <Datepicker
+          selected={date}
+          onChange={(datetime) => {
+            setDate(datetime);
+            console.log(date);
+          }}
+          placeholderText="나를 클릭하세요."
+          locale={ko}
+          dateFormat="yyyy년 MM월 dd일 h:mm aa"
+          minDate={new Date()}
+          withPortal
+          showTimeSelect
+          timeIntervals={30}
+          timeCaption="Time"
+          // customInput={<ExampleCustomInput />}
+        />
       </Modal.Body>
-      <Modal.Footer class="m-2 p-2">
+      <Modal.Footer class="d-flex mx-2 px-2 justify-content-between">
         <button type="button" class="btn btn-dark my-2" onClick={props.onHide}>
           돌아가기
+        </button>
+        <button
+          type="button"
+          class="btn btn-dark my-2"
+          datetime={datetime}
+          onClick={props.onChange}
+        >
+          저장하기
         </button>
       </Modal.Footer>
     </Modal>

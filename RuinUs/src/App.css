@@ -38,3 +38,13 @@
 #cause-btns > button {
   pointer-events: all;
 }
+
+.datepicker {
+  text-align: center;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  /* border: none; */
+  background-color: lightgrey;
+  margin: 0.5rem 0;
+}

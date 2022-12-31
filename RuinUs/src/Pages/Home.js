@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Title from '../Components/Title';
 import Setting from './setting';
+import testDB from './testDB.json';
 
 function Home() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -30,14 +30,9 @@ function Home() {
       <div class="container">
         <div class="row justify-content-center">
           <div class="bg-dark col-lg-8 col-md-10 col-sm-12">
-            <Title title="배고픈데 뭐 먹지?" tag="#슬픔 #걱정 #억울함" time="10분 후 삭제" />
-            <Title title="아무거나 먹어야지..." tag="#배고픔 #라면 #질려" time="1분 후 삭제" />
-            <Title title="UI... 어렵다..." tag="#슬픔 #우울함 #서러움" time="1주일 후 삭제" />
-            <Title title="그래도 힘내자!" tag="#힘내 #히히 #화이팅" time="삭제하지 않음" />
-            <Title title="배고픈데 뭐 먹지?" tag="#슬픔 #걱정 #억울함" time="10분 후 삭제" />
-            <Title title="아무거나 먹어야지..." tag="#배고픔 #라면 #질려" time="1분 후 삭제" />
-            {/* <Title /> */}
-            {/* <Title /> */}
+            {testDB.contents.map((contents, index) => (
+              <Title key={index} title={contents.title} tag={contents.tag} time={contents.time} />
+            ))}
           </div>
         </div>
       </div>
